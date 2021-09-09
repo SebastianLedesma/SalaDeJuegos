@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,24 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent {
 
-  usuario:string;
+  email:string;
   password:string;
 
-  constructor() {
-    this.usuario='';
+  constructor(private authService:AuthService, private router:Router) {
+    this.email='';
     this.password='';
   }
 
-  validarUsuario():void{
-    if(this.usuario == 'ricardoledesma' && this.password == '12345'){
-      window.location.href='bienvenido';
+  async validarUsuario(){
+    const usuario = await this.authService.logIn(this.email,this.password);
 
+    if(usuario){
+      this.router.navigate(['/home']);
     }
   }
 
   autocompletar(){
-    this.usuario= "ricardoledesma";
-    this.password='12345';
+    this.email= "ricardoledesma@mail.com";
+    this.password='123456';
   }
 
 }

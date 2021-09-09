@@ -8,6 +8,12 @@ import { HomeComponent } from './componentes/home/home.component';
 import { QuiensoyComponent } from './componentes/quiensoy/quiensoy.component';
 import { FormsModule } from '@angular/forms';
 import { BienvenidoComponent } from './componentes/bienvenido/bienvenido.component';
+import { NavComponent } from './componentes/nav/nav.component';
+import { RegistroComponent } from './componentes/registro/registro.component';
+import { AuthService } from './services/auth.service';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -15,14 +21,18 @@ import { BienvenidoComponent } from './componentes/bienvenido/bienvenido.compone
     LoginComponent,
     HomeComponent,
     QuiensoyComponent,
-    BienvenidoComponent
+    BienvenidoComponent,
+    NavComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
