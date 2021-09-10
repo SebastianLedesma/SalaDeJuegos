@@ -23,9 +23,9 @@ export class RegistroComponent implements OnInit {
   }
 
   async registrarUsuario(){
-    const usuario = await this.authService.registrarUsuario(this.email,this.password);
+    const usuarioRegistrado = await this.authService.registrarUsuario(this.email,this.password);
 
-    if(usuario){
+    if(usuarioRegistrado){
       this.router.navigate(['/home']);
     }else{
       this.estaRegistrado=true;

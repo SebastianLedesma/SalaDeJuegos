@@ -9,19 +9,20 @@ export class AuthService {
 
   constructor(public afAuth: AngularFireAuth) { }
 
-  logIn(email:string,pasword:string){
-    return this.afAuth.signInWithEmailAndPassword(email,pasword);
+  logIn(email: string, pasword: string) {
+    return this.afAuth.signInWithEmailAndPassword(email, pasword);
   }
 
-  async registrarUsuario(email:string,password:string){
-    if(await this.afAuth.fetchSignInMethodsForEmail(email)){
+  async registrarUsuario(email: string, password: string) {
+
+    return this.afAuth.createUserWithEmailAndPassword(email, password).then(resp => {
+      return resp.user;
+    }).catch(error => {
       return null;
-    }else{
-      return this.afAuth.createUserWithEmailAndPassword(email,password);
-    }
+    });
   }
 
-  logOut(){
+  logOut() {
     this.afAuth.signOut();
   }
 
